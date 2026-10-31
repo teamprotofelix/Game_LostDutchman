@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#15110e"><link rel="icon" href="assets/icon-256.webp" type="image/webp"><meta name="description" content="1896년 애리조나. 강에서 사금을 채취하고 광산을 탐험해 전설의 금광을 찾는 오프라인 HTML5 서부 모험 게임.">
+<title>금광을 찾아서 · Lost Dutchman Mine — HD Edition · Web Remastered</title>
+<link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+<div id="app">
+<header class="topbar"><div class="brand"><span class="brand-icon">✦</span><div><b>금광을 찾아서</b><small>LOST DUTCHMAN MINE · HD REMASTER · 2026</small></div></div><div class="top-tools"><button id="soundBtn" class="top-btn" title="소리 켜기/끄기">♪ 소리 켜기</button><button id="helpBtn" class="top-btn">? 도움말</button><button id="fullBtn" class="top-btn">⛶ 전체화면</button></div></header>
+<div id="statline" class="statline"><div class="stat"><span>☀ 기온</span><b id="temp">86°F</b></div><div class="stat"><span>◷ 일시</span><b id="dateText">1896. 4. 12 · 09:00</b></div><div class="stat"><span>＄ 현금</span><b id="cashText">$270</b></div><div class="stat stat-meter"><span>♥ 체력</span><div class="meter"><i id="hpBar"></i></div><b id="hpText">100</b></div><div class="stat stat-meter"><span>✦ 식량</span><div class="meter"><i id="foodBar"></i></div><b id="foodText">100</b></div><div class="stat stat-meter"><span>💧 수분</span><div class="meter"><i id="waterBar"></i></div><b id="waterText">100</b></div><div class="stat"><span>◈ 금광 단서</span><b id="clueText">0 / 6</b></div></div>
+<main class="layout">
+ <section class="playcol">
+  <div class="stage" id="stage"><canvas id="game" width="1280" height="720" aria-label="게임 화면" tabindex="0"></canvas><div class="stage-heading"><span id="zoneLabel">골드필드</span><span id="stageHint">방향키 이동 · E 상호작용</span></div><div class="toast" id="toast"></div><div class="target-hint" id="targetHint"></div>
+   <div id="titleOverlay" class="title-overlay"><div class="title-ornament">✧ ARIZONA · THE GOLD RUSH · 1896 ✧</div><img class="hero-logo" src="assets/hero-logo.webp" alt="금광을 찾아서 · Lost Dutchman’s Gold"><h1>사막 너머, 잊힌 황금을 향해</h1><h2>HIGH DEFINITION WESTERN ADVENTURE</h2><p>살아 숨 쉬는 황야 · 금광 탐사 · 서부의 전설</p><div class="title-actions"><button id="startBtn" class="btn btn-gold btn-big">새 모험 시작 <span>➜</span></button><button id="continueBtn" class="btn btn-glass btn-big" hidden>저장한 모험 이어하기</button></div><small>고전 서부 탐광 게임에서 영감을 얻어 독립 제작한 팬 게임 · 오프라인 실행</small></div>
+   <div class="mobile-pad" id="mobilePad"><div class="dpad"><button data-move="up">▲</button><div><button data-move="left">◀</button><button data-move="down">▼</button><button data-move="right">▶</button></div></div><button id="touchAction">E<br><small>행동</small></button></div>
+  </div>
+  <div class="actionbar"><div class="action-left"><b id="actionTitle">다음 행동을 선택하세요</b><span id="actionDesc">마을에서 장비를 준비하고, 사막으로 여행을 떠나세요.</span></div><div id="actionBtns" class="action-buttons"></div></div>
+  <div class="bottom-menu"><button data-panel="inventory">▣ 소지품 <kbd>I</kbd></button><button data-panel="map">🗺 탐험 지도 <kbd>M</kbd></button><button data-panel="journal">▤ 탐험 수첩 <kbd>J</kbd></button><button id="saveBtn">▣ 저장 <kbd>F6</kbd></button><button id="restBtn">☾ 휴식 / 캠프</button></div>
+ </section>
+ <aside class="sidecol">
+  <div class="side-panel explorer-panel"><div class="portrait-frame"><img src="assets/portrait.webp" alt="탐광인 초상" loading="lazy"></div><div class="explorer-profile"><small>THE PROSPECTOR</small><b>황야의 탐광인</b><span>1896 · SUPERSTITION MOUNTAINS</span><em>“전설은 지도에만 남지 않는다.”</em></div></div>
+  <div class="side-panel mini-section"><div class="panel-title"><span>✥ 실시간 탐험 지도</span><button id="mapExpandBtn" title="지도 크게 보기">↗</button></div><canvas id="minimap" width="320" height="218" aria-label="미니맵"></canvas><div class="map-legend"><span>◆ 현재 위치</span><span>◉ 골드필드</span><span>♨ 강</span><span>△ 산맥</span></div></div>
+  <div class="side-panel"><div class="panel-title">◈ 모험 기록 <small id="dayCount">1일차</small></div><div id="log" class="log"></div></div>
+  <div class="side-panel quest-box"><div class="panel-title">✧ 전설을 쫓는 길</div><p id="questText">아리조나 슈퍼스티션 산맥 어딘가에 숨겨진, 야코프 발츠의 황금 광산. 실마리를 모아 잊힌 갱도를 찾으세요.</p><div class="clue-row" id="cluePieces"><i></i><i></i><i></i><i></i><i></i><i></i></div><button id="cluesBtn" class="linkbtn">수집한 단서 확인 →</button></div>
+  <div class="side-foot">◎ 완전 오프라인 · CDN 없음 · 자동 저장 지원</div>
+ </aside>
+</main>
+<div class="dialog-backdrop" id="modal" hidden><div class="dialog"><button class="dialog-close" id="modalClose" aria-label="닫기">×</button><div id="modalContent"></div></div></div>
+</div>
+<script src="js/game.js"></script>
+</body></html>
